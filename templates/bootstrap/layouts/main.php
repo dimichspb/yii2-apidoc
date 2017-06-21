@@ -50,7 +50,7 @@ $this->beginPage();
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
-        'renderInnerContainer' => false,
+        //'renderInnerContainer' => false,
         'view' => $this,
     ]);
     $nav = [];
