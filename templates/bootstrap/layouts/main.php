@@ -46,7 +46,7 @@ $this->beginPage();
     <?php
     NavBar::begin([
         'brandLabel' => $this->context->pageTitle,
-        'brandUrl' => ($this->context->apiUrl === null && $this->context->guideUrl !== null) ? './guide-index.html' : './index.html',
+        'brandUrl' => ($this->context->apiUrl === null && $this->context->guideUrl !== null) ? './guide-index.html' : '/',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -54,6 +54,10 @@ $this->beginPage();
         'view' => $this,
     ]);
     $nav = [];
+
+    if ($this->context->guideUrl !== null) {
+        $nav[] = ['label' => 'Guide', 'url' => rtrim($this->context->guideUrl, '/') . '/' . $this->context->guidePrefix . 'index.html'];
+    }
 
     if ($this->context->apiUrl !== null) {
         $nav[] = ['label' => 'Class reference', 'url' => rtrim($this->context->apiUrl, '/') . '/index.html'];
@@ -67,10 +71,6 @@ $this->beginPage();
             }
             $nav[] = ['label' => 'Extensions', 'items' => $extItems];
         }
-    }
-
-    if ($this->context->guideUrl !== null) {
-        $nav[] = ['label' => 'Guide', 'url' => rtrim($this->context->guideUrl, '/') . '/' . $this->context->guidePrefix . 'README.html'];
     }
 
     echo Nav::widget([
